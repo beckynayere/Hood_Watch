@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from pyuploadcare.dj.models import ImageField
-from .models import Profile, NeighbourHood, Business, Post
-
+#from .models import Profile, NeighbourHood, Business, Post
+from .models import NeighbourHood,Profile,Business,Post
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
