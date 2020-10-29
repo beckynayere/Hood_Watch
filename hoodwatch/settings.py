@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hood',
     'bootstrap4',
     'crispy_forms',
+    'pyuploadcare.dj',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
