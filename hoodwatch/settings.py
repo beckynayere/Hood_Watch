@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'pyuploadcare.dj',
+    'rest_framework',
 ]
 
 UPLOADCARE = {
