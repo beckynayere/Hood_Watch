@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from pyuploadcare.dj.models import ImageField
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+import datetime as dt
+
 
 # Create your models here.
 class NeighbourHood(models.Model):
