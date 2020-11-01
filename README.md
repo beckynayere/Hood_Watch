@@ -6,12 +6,12 @@
 Tis is a neighborhood app where a user must signup first, be able to join a hood owned by the hood admin, and once you 
 join a hood, one can see businesses and posts in only that wood they belong to.  
 ##  Live Link  
- Click [View Site](https://hood-watchapp.herokuapp.com)  to visit the site
+ Click [View Site](https://https://hoodwatchnayeres.herokuapp.com/)  to visit the site
   
 ## Screenshots 
 ###### Home page
  
-<img src="https://ucarecdn.com/457f313d-4181-4d86-aca7-a91151d80707/hood.png">
+<img src="static/images/Screen Shot 2020-11-01 at 23.01.38.png">
 
  
 ## User Story  
@@ -29,7 +29,7 @@ To get the project .......
   
 ##### Cloning the repository:  
  ```bash 
-https://github.com/Owiti-Charles/HoodWatch.git
+https://github.com/beckynayere/Hood_Watch
 ```
 ##### Navigate into the folder and install requirements  
  ```bash 
@@ -74,9 +74,9 @@ Open the application on your browser `127.0.0.1:8000`.
 * There are no known bugs currently but pull requests are allowed incase you spot a bug  
   
 ## Contact Information   
-If you have any question or contributions, please email me at [mikeycharlesm7@gmail.com]  
+If you have any question or contributions, please email me at [nereahhopebecky@gmail.com]  
   
 ## License 
 
-* [![License](https://img.shields.io/packagist/l/loopline-systems/closeio-api-wrapper.svg)](https://github.com/Owiti-Charles/Picture-Globe/blob/master/LICENSE)  
-* Copyright (c) 2019 **Owiti Charles**
+* [![License](https://img.shields.io/packagist/l/loopline-systems/closeio-api-wrapper.svg)](https://github.com/beckynayere/Hood_Watch/blob/master/LICENSE)  
+* Copyright (c) 2020 **Becky Nayere**
