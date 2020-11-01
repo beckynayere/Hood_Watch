@@ -190,3 +190,5 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
 }
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
