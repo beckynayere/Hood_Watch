@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from pyuploadcare.dj.models import ImageField
 #from .models import Profile, NeighbourHood, Business, Post
 from .models import NeighbourHood,Profile,Business,Post
+
+
+class UserProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget = forms.TextInput()
+
+        
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
