@@ -1,125 +1,28 @@
-{%extends "django_registration/base.html"%}
-{% load bootstrap4 %}
-{% load static %}
-
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
+<div class="jumbotron-fluid" style=" overflow: hidden; overflow-y: hidden; height: 640px; background-size: cover; background-image: url(static/images/hood 7.jpg);" >
 
-<head>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-
-<!-- Full Page Intro -->
-<div class="view full-page-intro"
-    style="background-image: url('static/images/hood 5.jpg'); background-repeat: no-repeat; background-size: cover;">
-
-    <!-- Mask & flexbox options-->
-    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
-
-        <!-- Content -->
-        <div class="container">
-
-            <!--Grid row-->
-            <div class="row wow fadeIn">
-
-                <!--Grid column-->
-                <div class="col-md-6 mb-4 white-text text-center text-md-left">
-
-                    <h1 class="display-4 font-weight-bold">Hood Watch</h1>
-
-                    <hr class="hr-light">
-
-                    <p>
-                        <strong>Best & free website to find out the things about your hood</strong>
-                    </p>
-
-                    <p class="mb-4 d-none d-md-block">
-                        <strong>You can login and rate the posted websites</strong>
-                    </p>
-
-                    <a href="/accounts/register/" class="btn btn-indigo btn-lg">Sign UP
-                        <i class="fas fa-graduation-cap ml-2"></i>
-                    </a>
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-6 col-xl-5 mb-4">
-
-                    <!--Card-->
-                    <div class="card">
-
-                        <!--Card content-->
-                        <div class="card-body">
-
-                            <!-- Form -->
-                            <form action="/accounts/login/" method="post">
-                                {% csrf_token %}
-                                {% form|crispy%}
-                                <!-- Heading -->
-                                <h3 class="dark-grey-text text-center">
-                                    <strong>Login</strong>
-                                </h3>
-                                <hr>
-
-                                <div class="md-form">
-                                    <i class="fas fa-user prefix"></i>
-                                    <input type="text" id="form3" class="form-control validate" name='username'>
-                                    <label for="form3">username</label>
-                                </div>
-                                <div class="md-form">
-                                    <i class="fas fa-lock prefix"></i>
-                                    <input type="password" id="inputValidationEx2" class="form-control validate"
-                                        name="password">
-                                    <label for="inputValidationEx2" data-error="wrong" data-success="">Type your
-                                        password</label>
-                                </div>
-
-                                <fieldset class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="checkbox1" type="submit">
-                                    <label for="checkbox1" class="form-check-label dark-grey-text">Stay Signed
-                                        in</label>
-                                </fieldset>
-                                <div class="text-center">
-                                    <hr>
-                                    <input class="btn btn-indigo" type="submit" value="LOGIN">
-                                    <input type="hidden" name="next" value="{{ next }}" />
-                                </div>
-                            </form>
-                            <!-- Form -->
-                            {% if form.errors %}
-                            <p class=" label label-danger">
-                                Your username and password didn't match.
-                                Please try again.
-                            </p>
-                            <a class="btn btn-danger" onclick="toastr.error('Your username or password did not match. Please try again');">Error
-                                message</a>
-                            {% endif %}
-
-                        </div>
-
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card" style="margin-top:14%; padding:20px">
+                <div class="card-body">
+                    <h5 class="card-title"><a>Sign in to continue</a> <span style="float:right">Are you a member yet? <a
+                            href="{% url 'signup' %}" class="text-info">Register now</a></span></h5>
+                    <div class="card-text">
+                        <form action="" method="post" novalidate >
+                            {% csrf_token%}
+                            {{ form|crispy}}
+                            <button type="submit" class="btn btn-info btn-sm">Login</button>
+                        </form>
                     </div>
-                    <!--/.Card-->
-
                 </div>
-                <!--Grid column-->
-
             </div>
-            <!--Grid row-->
 
         </div>
-        <!-- Content -->
-
+        <div class="col-md-2"></div>
     </div>
-    <!-- Mask & flexbox options-->
 
 </div>
-<!-- Full Page Intro -->
-
-<!--Main layout-->
-
-<!--/.Footer-->
-<script>
-    new WOW().init()
-</script>
 {% endblock %}
