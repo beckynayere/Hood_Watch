@@ -2,7 +2,7 @@ from django.urls import path,include
 from .  import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.conf.urls import url
 
 urlpatterns = [
 
@@ -18,8 +18,9 @@ urlpatterns = [
     path('leave_hood/<id>', views.leave_hood, name='leave-hood'),
     path('single_hood/<hood_id>', views.single_hood, name='single-hood'),
     path('<hood_id>/new-post', views.create_post, name='post'),
-    path('<hood_id>/members', views.hood_members, name='members'),
-    path('search/', views.search_business, name='search'),
+    url('<hood_id>/members', views.hood_members, name='members'),
+    url('search/', views.search_business, name='search'),
+    url('^api/businesses/$', views.BusinessList.as_view())
 
 ]
 if settings.DEBUG:
