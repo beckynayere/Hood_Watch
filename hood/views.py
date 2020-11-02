@@ -12,8 +12,8 @@ from .serializer import BusinessSerializer
 
 # Create your views here.
 @login_required(login_url='login')
-def index(request):
-    return render(request, 'index.html')
+def home(request):
+    return render(request, 'home.html')
 
 
 def signup(request):
@@ -25,7 +25,7 @@ def signup(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('index')
+            return redirect('home')
     else:
         form = SignupForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -49,6 +49,28 @@ def create_hood(request):
     else:
         form = NeighbourHoodForm()
     return render(request, 'newhood.html', {'form': form})
+
+@login_required
+def businesses(request):
+    current_user = request.user
+    neighborhood = UserProfile.objects.get(user=current_user).neighborhood
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.neighborhood = neighborhood
+            business.save()
+            return redirect('businesses')
+    else:
+        form = BusinessForm()
+
+    try:
+        businesses = Business.objects.filter(neighborhood=neighborhood)
+    except:
+        businesses = None
+
+    return render(request, 'businesses.html', {"businesses": businesses, "form": form})
 
 def single_hood(request, hood_id):
     hood = NeighbourHood.objects.get(id=hood_id)
@@ -135,3 +157,21 @@ def search_business(request):
     else:
         message = "You haven't searched for any image category"
     return render(request, "results.html")
+
+class BusinessList(APIView):
+    def get(self, request, format=None):
+        all_businesses = Business.objects.all()
+        serializers = BusinessSerializer(all_businesses, many=True)
+        return Response(serializers.data)
+
+
+@login_required
+def search(request):
+    current_user = request.user
+    if 'search' in request.GET and request.GET["search"]:
+        search_term = request.GET.get("search")
+        businesses = Business.objects.filter(name__icontains=search_term)
+        return render(request, 'search.html', {'businesses': businesses})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message": message})
