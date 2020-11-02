@@ -8,14 +8,14 @@ import datetime as dt
 
 # Create your models here.
 class NeighbourHood(models.Model):
-    name = models.CharField(max_length=50)
-    location = models.CharField(max_length=60)
+    name = models.CharField(max_length=30)
+    location = models.CharField(max_length=50)
     admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='hood')
     hood_logo = models.ImageField(upload_to='images/')
     description = models.TextField()
     health_tell = models.IntegerField(null=True, blank=True)
     police_number = models.IntegerField(null=True, blank=True)
-
+    occupants = models.IntegerField(null=True)
     def __str__(self):
         return f'{self.name} hood'
 
@@ -29,12 +29,23 @@ class NeighbourHood(models.Model):
     def find_neighborhood(cls, neighborhood_id):
         return cls.objects.filter(id=neighborhood_id)
 
+    def update_neighborhood(self):
+        self.save()
+
+    def update_occupants(self):
+        self.occupants += 1
+        self.save()
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    name = models.CharField(max_length=80, blank=True)
+    name = models.CharField(max_length=40, blank=True)
     bio = models.TextField(max_length=254, blank=True)
+    first_name = models.CharField(max_length=30, null=True)
+    last_name = models.CharField(max_length=50, null=True)
     profile_picture = models.ImageField(upload_to='images/', default='default.png')
     location = models.CharField(max_length=50, blank=True, null=True)
+    email = models.EmailField(default='',max_length=60)
+    phone = models.IntegerField(null=True)
     neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.SET_NULL, null=True, related_name='members', blank=True)
 
     def __str__(self):
@@ -69,6 +80,14 @@ class Business(models.Model):
     def search_business(cls, name):
         return cls.objects.filter(name__icontains=name).all()
 
+    @classmethod
+    def find_business(cls, business_id):
+        business = Business.objects.get(id=business_id)
+        return business
+
+    def update_business(self):
+        self.save()
+
 
 class Post(models.Model):
     title = models.CharField(max_length=120, null=True)
@@ -76,3 +95,26 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='hood_post')
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    comment = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.comment
+
+
+class Location(models.Model):
+    name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.name
