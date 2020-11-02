@@ -41,7 +41,7 @@ a:focus {
 
 .navbar {
     padding: 20px 10px;
-    background-color: #35495e;
+    background-color: #592e1a;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -64,10 +64,10 @@ span {
     align-items: stretch;
 }
 .tt{
-    color:#1a3e59;
+    color:orangered;
 }
 .hpost{
-   background-color:#1a3e59;
+   background-color:#592e1a;
    color: white;
 }
 .poster{
@@ -78,7 +78,7 @@ span {
     min-width: 250px;
     max-width: 250px;
     padding-right:10px;
-    background: #1a3e59;
+    background: #591e1a;
     color: #fff;
     position: -webkit-sticky;
     position: sticky;
@@ -152,7 +152,7 @@ span {
 }
 
 #sidebar ul li a:hover {
-    color: teal;
+    color: hex #fd6a02;
     background: #fff;
 }
 
@@ -163,7 +163,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #cc6d6d;
 }
 
 a[data-toggle="collapse"] {
@@ -181,7 +181,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background:rgb(0, 153, 255);
+    background:rgb(255, 0, 106);
 }
 
 ul.CTAs {
@@ -242,7 +242,7 @@ ul.CTAs a {
         padding: 10px !important;
     }
     #sidebar ul li a i {
-        font-size: 1.3em;
+        font-size: 1.5em;
     }
     #sidebar {
         margin-left: 0;
