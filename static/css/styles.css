@@ -67,7 +67,7 @@ span {
     color:orangered;
 }
 .hpost{
-   background-color:#592e1a;
+   background-color:#ffd5c2;
    color: white;
 }
 .poster{
@@ -78,7 +78,7 @@ span {
     min-width: 250px;
     max-width: 250px;
     padding-right:10px;
-    background: #591e1a;
+    background: #d3190c;
     color: #fff;
     position: -webkit-sticky;
     position: sticky;

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <button type="button" id="sidebarCollapse" class="btn btn-sm btn-info">
             <i class="fas fa-align-left"></i>
@@ -26,4 +26,34 @@
             </ul>
         </div>
     </div>
+</nav> -->
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo center"><i class="material-icons">cloud</i>Hood</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{% url 'businesses' %}"> <i class="material-icons left">business</i> Businesses</a></li>
+            <li><a href="#contactsmodal" class="modal-trigger"> <i class="material-icons left">call</i> Emergeny
+                    Contacts</a></li>
+            <li><a href="{% url 'logout' %}"><i class="material-icons left">account_circle</i>Logout</a></li>
+        </ul>
+    </div>
 </nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="{% url 'businesses' %}"> <i class="material-icons left">business</i> Businesses</a></li>
+    <li><a href="#contactsmodal" class="modal-trigger"> <i class="material-icons left">call</i> Emergeny Contacts</a>
+    </li>
+    <li><a href="{% url 'logout' %}"><i class="material-icons left">account_circle</i>Logout</a></li>
+</ul>
+
+<!-- Modal Structure -->
+<div id="contactsmodal" class="modal">
+    <div class="modal-content">
+        <h4>Emergeny Contacts</h4>
+        <p>Police: 999 <br>Ambulance: 5674 <br>Fire Brigade: 7899</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
