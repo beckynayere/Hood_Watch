@@ -8,7 +8,7 @@
         <li class="mb-4">
             <a href="{% url 'profile' user.username %}">
                 <img class="rounded-circle nav-img"src="{{ user.profile.profile_picture.url }}" alt="">
-                &nbsp; My Profile
+                &nbsp; Profile
             </a>
 
         </li>
@@ -18,18 +18,21 @@
                 &nbsp; Edit Profile
             </a>
         </li>
-        <li class="mb-4">
-            <a href="{% url 'hood' %}">
-                <i class="fas fa-home"></i>&nbsp;
-                &nbsp; Businesses
-            </a>
-        </li>
+
+
         <li class="mb-4">
             <a href="{% url 'hood' %}">
                 <i class="fas fa-home"></i>&nbsp;
                 &nbsp; Hoods
             </a>
         </li>
+        <li class="mb-4">
+            <a href="{% url 'businesses' %}">
+                <i class="fas fa-home"></i>&nbsp;
+                &nbsp; Businesses
+            </a>
+        </li>
+        
 
         {% if user.profile.neighbourhood %}
         <li class="mb-4">

@@ -1,25 +1,55 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
 <a class="" href="/"><i class="fa fa-home"style="font-size:16px;color:red" ></i></a>
-  <a class="navbar-brand text-white" href="{%url 'home'%}">NayersHood</a>
+  <h3><a class="navbar-brand text-yellow" href="{%url 'home'%}">NayersHood</a></h3>
+  <strong><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></strong>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link text-white" href="{%url 'profile'%}">Profile <span class="sr-only">(current)</span></a>
+      <li class="mb-4">
+        <a href="{% url 'profile' user.username %}">
+            <img class="rounded-circle nav-img"src="{{ user.profile.profile_picture.url }}" alt="">
+            &nbsp; Profile
+        </a>
+      <li class="mb-4">
+        <a href="{% url 'hood' %}">
+            <i class="fas fa-business"></i>&nbsp;
+            &nbsp; Business
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link text-white" href="{%url 'businesses'%}">Businesses</a>
-      </li>
-<li class="nav-item">
-        <a class="nav-link text-white" href="{%url 'businesses'%}">Edit Profile</a>
-      </li>
-<li class="nav-item">
-        <a class="nav-link text-white" href="{%url 'businesses'%}">Hoods</a>
+    <li class="nav-item">
+        <li class="mb-4">
+          <a href="{% url 'edit-profile' user.username %}">
+              <i class="fas fa-edit"></i>&nbsp;
+              &nbsp; Edit Profile
+          </a>
       </li>
 
+      </li>
+<li class="nav-item">
+  <li class="mb-4">
+    <a href="{% url 'hood' %}">
+        <i class="fas fa-home"></i>&nbsp;
+        &nbsp; Hoods
+    </a>
+  </li>
+</li>
+{% if user.profile.neighbourhood %}
+        <li class="mb-4">
+            <a href="{% url 'single-hood' user.profile.neighbourhood.id %}">
+                <i class="fas fa-paper-plane"></i>&nbsp;
+                &nbsp;{{user.profile.neighbourhood.name}}
+            </a>
+        </li>
+        {% else %}
+        <li class="mb-4">
+            <a href=""> &nbsp;
+                No Hood Yet
+            </a>
+        </li>
+        {% endif %}
     </ul>
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -27,9 +57,12 @@
                     {% if user.is_authenticated %}
                         <div class="row">
                             <div class="col-md-12 nav-search">
-                                <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
-                                    <input class="form-control my-2 my-sm-0 search-input" name="hoods" type="search" placeholder="Search hoods" aria-label="Search">
-                                </form>
+                              <form class="form-inline search-form my-2 my-lg-0" action="{% url 'search' %}" role="search">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="category" aria-label="Search">
+                              </form>
+                              <span class="username navbar-text text-white">
+                                {{request.user}}
+                              </span>
                             </div>
                         </div>
                         </div>
@@ -40,5 +73,5 @@
                     </li>
                 </ul>
             </div>
-</div>
+
             </nav>
