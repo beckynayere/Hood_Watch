@@ -54,19 +54,16 @@
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
                 <div class="container-fluid">
-                    {% if user.is_authenticated %}
-                        <div class="row">
-                            <div class="col-md-12 nav-search">
-                              <form class="form-inline search-form my-2 my-lg-0" action="{% url 'search' %}" role="search">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="category" aria-label="Search">
-                              </form>
-                              <span class="username navbar-text text-white">
-                                {{request.user}}
-                              </span>
-                            </div>
-                        </div>
-                        </div>
-                    {%endif%}
+                  {% if user.is_authenticated %}
+                  <div class="row">
+                      <div class="col-md-12 nav-search">
+                          <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
+                              <input class="form-control my-2 my-sm-0 search-input" name="hoods" type="search" placeholder="Search hoods" aria-label="Search">
+                          </form>
+                      </div>
+                  </div>
+                  </div>
+              {%endif%}
                 <ul  class="navbar-nav ml-auto" style="list-style: none">
                     <li>
                         <i class="fa fa-sign-out"  style="font-size:30px;color:red" aria-hidden="true"></i><a href="/logout">Logout</a>
@@ -75,3 +72,5 @@
             </div>
 
             </nav>
+
+           
