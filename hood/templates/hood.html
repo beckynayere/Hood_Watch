@@ -1,0 +1,113 @@
+{%extends 'registration/base.html'%}
+{%load bootstrap4 %}
+{% block content%}
+
+<style>
+     .jumbotron{
+
+        width: 100%;
+        margin-left: 1%;
+        background-color: #447e9b;
+        text-align: center;
+    }
+
+</style>
+	<div class="container">
+
+			<div class="row">
+                <div class="col-md-8">
+				<h2><strong>{{hood.name.capitalize}}</strong></h2>
+                <hr>
+                <h4>Location: <strong>{{hood.loc.capitalize}}</strong></h4>
+                <p>{{hood.occupants}} Occupants</p>
+				<h4>{{hood.bio}}</h4>
+
+				<a class="btn btn-sm btn-success" href="{% url 'post' %}">Create a Post</a>
+				<a class="btn btn-sm btn-danger" href="  {% url 'business' %}">Add busines</a>
+
+				<p>
+				<div>
+
+				  <div class="row text-center">
+				    <small> Businesses in this hood</small>
+                      <hr>
+
+
+				  </div>
+
+                        <table class="table table-striped table-dark">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Business</th>
+                                        <th scope="col">Owner</th>
+                                        <th scope="col">Neighbourhood</th>
+                                        <th scope="col">Business Email</th>
+
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  {% if businesses %}
+                                      {% for biz in businesses %}
+                                    <tr>
+                                      <th scope="row">1</th>
+                                      <td>{{biz.name.capitalize}}</td>
+                                      <td>{{biz.user}}</td>
+                                      <td>{{ biz.hood }}</td>
+                                        <td>{{biz.email}}</td>
+                                    </tr>
+                                  	{%endfor%}
+                                  {% else %}
+                                      <h4 class="text-center">No Business has been created for this hood yet. Be the first to create on <a href="{% url 'business' %}">here</a></h4>
+                                  {% endif %}
+                                  </tbody>
+                                </table>
+                {%if posts%}
+                    <div class="row">
+				    		<div class="col-md-7"></div>
+				    		<div class="col-md-5">
+				    			<form class="" class="" action="{% url 'Search' %}">
+						            <div class="form-group">
+						              <input type="text" class="form-control" placeholder="Search Forum" name = "searchForum">
+						            </div>
+
+						        </form>
+				    		</div>
+				    	</div
+
+				    	<div class="row">
+				    		{% for post in posts %}
+					    		<div class="jumbotron"><h3 style="text-align: center">Posts</h3>
+                                      <div class="card" style="margin-bottom:50px">
+                                          <div class="card-title"><strong>{{ post.title }}</strong>
+                                          </div>
+                                          <div class="card-body">
+                                              <p>{{post.description}}
+                                <p><a href="{% url 'comment' post_id=post.id %}"><i class="fa fa-comment" aria-hidden="true" style="color:black;"></i>Add Comment</a></p>
+
+                                {%if comments%}
+                                    <small>Comments</small>
+                                                {% for comment in comments %}
+                                                    <p>{{ comment.comment }}</p>
+
+                                                {% endfor %}
+
+
+                                            {% else %}
+                                            <h4 class="text-center">No comments</h4>
+                                            {% endif %}
+                                            <hr>
+                                          </div>
+                                      </div>
+                                </div>
+
+				    		{% endfor %}
+
+				    	</div>
+
+				    	{% else %}
+				    	<h4 class="text-center">No Post has been created for this hood yet. Be the first to create on <a href="{% url 'post' %}">here</a></h4>
+				    	{% endif %}
+
+
+{%endblock%}

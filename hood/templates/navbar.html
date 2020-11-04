@@ -1,59 +1,44 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-        <button type="button" id="sidebarCollapse" class="btn btn-sm btn-info">
-            <i class="fas fa-align-left"></i>
-        </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<a class="" href="/"><i class="fa fa-home"style="font-size:16px;color:red" ></i></a>
+  <a class="navbar-brand text-white" href="{%url 'home'%}">NayersHood</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-white" href="{%url 'profile'%}">Profile <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{%url 'businesses'%}">Businesses</a>
+      </li>
+<li class="nav-item">
+        <a class="nav-link text-white" href="{%url 'businesses'%}">Edit Profile</a>
+      </li>
+<li class="nav-item">
+        <a class="nav-link text-white" href="{%url 'businesses'%}">Hoods</a>
+      </li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item active">
-                     <img class="rounded-circle nav-img"src="{{ user.profile.profile_picture.url }}" alt="">
-                    &nbsp; <span class="text-white">{{user.username|title}}</span>
-                </li>
-                {% else %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
+    </ul>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav> -->
-<nav>
-    <div class="nav-wrapper">
-        <a href="/" class="brand-logo center"><i class="material-icons">cloud</i>Hood</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="{% url 'businesses' %}"> <i class="material-icons left">business</i> Businesses</a></li>
-            <li><a href="#contactsmodal" class="modal-trigger"> <i class="material-icons left">call</i> Emergeny
-                    Contacts</a></li>
-            <li><a href="{% url 'logout' %}"><i class="material-icons left">account_circle</i>Logout</a></li>
-        </ul>
-    </div>
-</nav>
-
-<ul class="sidenav" id="mobile-demo">
-    <li><a href="{% url 'businesses' %}"> <i class="material-icons left">business</i> Businesses</a></li>
-    <li><a href="#contactsmodal" class="modal-trigger"> <i class="material-icons left">call</i> Emergeny Contacts</a>
-    </li>
-    <li><a href="{% url 'logout' %}"><i class="material-icons left">account_circle</i>Logout</a></li>
-</ul>
-
-<!-- Modal Structure -->
-<div id="contactsmodal" class="modal">
-    <div class="modal-content">
-        <h4>Emergeny Contacts</h4>
-        <p>Police: 999 <br>Ambulance: 5674 <br>Fire Brigade: 7899</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="container-fluid">
+                    {% if user.is_authenticated %}
+                        <div class="row">
+                            <div class="col-md-12 nav-search">
+                                <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
+                                    <input class="form-control my-2 my-sm-0 search-input" name="hoods" type="search" placeholder="Search hoods" aria-label="Search">
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                    {%endif%}
+                <ul  class="navbar-nav ml-auto" style="list-style: none">
+                    <li>
+                        <i class="fa fa-sign-out"  style="font-size:30px;color:green" aria-hidden="true"></i><a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
 </div>
+            </nav>

@@ -1,0 +1,17 @@
+{% extends 'registration/base.html'%}
+{% block content %}
+<div class="col-md-3"></div>
+
+<div class="col-md-3" style="margin-top: 100px">
+    <h4 style="text-align:center;"> Local businesses!</h4>
+    {% for business in businesses %}
+    <div class="well">
+        <h3>Name:{{business.name}}</h3>
+         <p>{{business.email}}</p>
+        <a href="">{{ business.hood }}</a>
+    </div>
+
+    {% endfor %}
+<div class="col-md-3"></div>
+
+{% endblock %}

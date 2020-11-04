@@ -1,0 +1,29 @@
+{%extends 'registration/base.html'%}
+{%load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{%block content%}
+<div class="row container" style="padding-bottom:20px">
+
+			<div class="col-md-7">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="text-center">Create Hood</h3>
+					</div>
+					<div class="panel-body">
+						<form action="{% url 'createHood' %}" method="post">
+
+							{%csrf_token%}
+                            {%form|crispy%}
+							{% bootstrap_form form %}
+							<button type="submit" class="btn btn-success btn-sm btn-block">Create Hood</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+
+	</div>
+
+{%endblock%}

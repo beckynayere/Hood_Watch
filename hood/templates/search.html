@@ -1,0 +1,31 @@
+{% include 'base.html' %}
+{% block content %}
+<div class="container" style="color: white;">
+    <div class="col m12">
+        {% if businesses %}
+        <table>
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Owner</th>
+              <th>Email</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for business in businesses %}
+                <tr>
+                  <td>{{business.name}}</td>
+                  <td>{{business.description}}</td>
+                  <td>{{business.user}}</td>
+                  <td>{{business.email}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h1 class="center-align">{{message}} </h1>
+      {% endif %}
+    </div>
+{% endblock %}

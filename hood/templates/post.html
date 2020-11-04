@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
@@ -16,4 +16,32 @@
     </div>
 
 </div>
+{% endblock %} -->
+{% include 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row" style="padding-top: 50px;">
+            <div class="col s12 m12">
+              <div class="card-panel">
+                <div class="header" style="border-bottom: 1px solid rgba(0,0,0,0.14);">
+                    <h5>{{post.title}}</h5>
+                </div>
+                    <p>{{post.content}}</p>
+                    <p>Posted by: {{post.user}}</p>
+                    <form  action="{%url 'post' post.id %}" method="post" enctype="multipart/form-data">
+                      {%csrf_token%}
+                    {{ form|crispy }}
+                    
+                      <input type="submit" class="btn btn-success btn-lg" value="Post">
+                    </form>
+                    {% for comment in comments %}
+                        <div class="" style="padding-top:20px;">
+                            <span><strong>{{comment.user}}: </strong>{{comment.comment}} <br> {{comment.pub_date}}</span>
+                        </div>
+                    {% endfor %}
+              </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

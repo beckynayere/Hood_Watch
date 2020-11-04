@@ -1,12 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'registration/base.html' %}
 {% load static %}
 {% block content %}
-<div class="container" >
-    <div class="text-white text-center" style="margin-top:15%">
-        <h1>Welcome to The HoodWatch</h1>
-        <h5 style="margin-top:6%">Start by joining a hood </h5>
-        <a href="{% url 'hood' %}" class="btn btn-sm btn-info mt-4">Join TheHood</a>
-    </div>
 
+
+<div class="container">
+    <hr>
+    <i class="fa fa-plus">
+        <a href="{% url 'createHood' %}"> create hood </a></i>
+    <hr>
+
+ <div class="row">
+
+   {% for hood in hoods %}
+   <div class="col-md-4">
+     <div class="card">
+         {{hood.name.capitalize}}
+       <div class="card-body" style="width: auto">
+         <p>{{hood.occupants}} Occupants </p>
+           <p> <i class="fa fa-map-marker" aria-hidden="true"> {{ hood.loc }}</i></p>
+         <a href=" {% url 'joinHood' hood.id %}" class="btn btn-sm btn-success">Join</a>
+       </div>
+     </div>
+   </div>
+
+   {% endfor %}
+ </div>
 </div>
 {% endblock %}
+

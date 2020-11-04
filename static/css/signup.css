@@ -1,0 +1,70 @@
+  
+body, html {
+    height: 100%; }
+  
+  body {
+    background-image: url("static/images/hood 16.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover; }
+  
+  .mobile-box {
+    width: 360px;
+    height: 640px;
+    color: #fff;
+    text-align: center;
+    -webkit-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.92) !important;
+    box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.92) !important; }
+  
+  .view .bg-image {
+    height: 100%; }
+  
+  .view .gradient-mask {
+    background: -webkit-linear-gradient(rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.8) 100%);
+    background: -o-linear-gradient(rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.8) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 47, 75, 0.8)), to(rgba(220, 66, 37, 0.8)));
+    background: linear-gradient(rgba(0, 47, 75, 0.8) 0%, rgba(220, 66, 37, 0.8) 100%);
+    /* Chrome10+,Safari5.1+ */
+    /* Opera 11.10+ */
+    /* IE10+ */
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#002f4b', endColorstr='#00000000', GradientType=0); }
+  
+  .view a {
+    color: #fff; }
+    .view a:hover {
+      color: #dfdfdf; }
+  
+  .view input[type=text], .view input[type=password], .view input[type=email] {
+    border-bottom: 1px solid #fff; }
+  
+  .view .md-form input[type=text]:focus:not([readonly]), .view .md-form input[type=password]:focus:not([readonly]), .view .md-form input[type=email]:focus:not([readonly]) {
+    border-bottom: 1px solid #bbdefb !important;
+    -webkit-box-shadow: 0 1px 0 0 #bbdefb !important;
+    box-shadow: 0 1px 0 0 #bbdefb !important; }
+  
+  .view .md-form label {
+    color: #fff; }
+    .view .md-form label.active {
+      color: #bbdefb !important; }
+  
+  /* Remove chrome autofil background color */
+  @-webkit-keyframes autofill {
+      to {
+        color: #fff;
+          background: transparent;
+      }
+  }
+  
+  input:-webkit-autofill {
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+  }
+  .md-form>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label, 
+  .md-form  >input[type=date]:not(.browser-default)+label, 
+  .md-form  >input[type=time]:not(.browser-default)+label {
+      transform: translateY(-25px);
+      transform-origin: 0 0;
+        font-size: .8rem;
+    }

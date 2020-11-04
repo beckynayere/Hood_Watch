@@ -1,23 +1,17 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container" style="background-image: url(static/images/hood 14.jpg);" >
-    <div class="row">        
-        <div class="col-md-8">
-            <div class="card" style="margin-top:2%; padding:20px">
-                <div class="card-body">
-                    <h5 class="card-title"><a>Register to be a member</a> <span style="float:right">Are you a member? <a
-                            href="{% url 'login' %}" class="text-info">Login now</a></span></h5>
-                    <div class="card-text">
-                        <form action="" method="post" novalidate>
-                            {% csrf_token%}
-                            {{ form|crispy}}
-                            <button type="submit" class="btn btn-info btn-sm"> Register</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>        
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-white">
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-sm btn-info">Sign Up</button>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 

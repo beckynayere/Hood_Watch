@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect,Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import UpdateProfileForm, NeighbourHoodForm, PostForm,CommentForm
+from .forms import UpdateProfileForm, NeighbourHoodForm, PostForm,CommentForm,CreateHoodForm
 from django.contrib.auth import login, authenticate
 from .forms import SignupForm, BusinessForm
 from django.contrib.auth import authenticate
@@ -15,7 +15,31 @@ from rest_framework.views import APIView
 # Create your views here.
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'home.html')
+
+    # hoods = Neighbourhood.objects.all()
+    # business = Business.objects.all()
+    # posts = Post.objects.all()
+
+    return render(request,'home.html')
+
+@login_required(login_url = 'login')
+def all_hoods(request):
+
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id=request.user).exists():
+            hood = Neighbourhood.objects.get(pk=request.user.join.hood_id.id)
+            businesses = Business.objects.filter(hood=request.user.join.hood_id.id)
+            posts = Post.objects.filter(hood=request.user.join.hood_id.id)
+            comments = Comments.objects.all()
+            print(posts)
+            return render(request, 'hood.html')
+        else:
+            neighbourhoods = Neighbourhood.objects.all()
+            return render(request, 'hood.html', locals())
+    else:
+        neighbourhoods = Neighbourhood.objects.all()
+
+        return render(request, 'hood.html', locals())
 
 
 def signup(request):
@@ -40,6 +64,33 @@ def hoods(request):
     }
     return render(request, 'all_hoods.html', params)
 
+def create_business(request):
+    current_user = request.user
+    print(Profile.objects.all())
+    owner = Profile.get_by_id(current_user)
+    # this_hood = Neighbourhood.objects.all()
+    if request.method == 'POST':
+        form = BusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_biz=form.save(commit=False)
+            new_biz.user = current_user
+            # new_biz.hood =this_hood
+            new_biz.save()
+            return redirect(home)
+    else:
+        form = BusinessForm()
+    return render(request,"businessform.html")
+
+
+def display_business(request):
+    user = request.user
+    owner = Profile.get_by_id(user)
+    businesses = Business.objects.all()
+
+
+    return render (request, 'business.html')
+
+@login_required
 def create_hood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -52,27 +103,28 @@ def create_hood(request):
         form = NeighbourHoodForm()
     return render(request, 'newhood.html', {'form': form})
 
+
 @login_required
 def businesses(request):
     current_user = request.user
-    neighborhood = UserProfile.objects.get(user=current_user).neighborhood
+    neighbourhood = Profile.objects.get(user=current_user).neighbourhood
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
             business = form.save(commit=False)
             business.user = current_user
-            business.neighborhood = neighborhood
+            business.neighbourhood = neighbourhood
             business.save()
             return redirect('businesses')
     else:
         form = BusinessForm()
 
     try:
-        businesses = Business.objects.filter(neighborhood=neighborhood)
+        businesses = Business.objects.filter(neighbourhood=neighbourhood)
     except:
         businesses = None
 
-    return render(request, 'businesses.html', {"businesses": businesses, "form": form})
+    return render(request, 'business.html', {"businesses": businesses, "form": form})
 
 def single_hood(request, hood_id):
     hood = NeighbourHood.objects.get(id=hood_id)
@@ -96,6 +148,19 @@ def single_hood(request, hood_id):
         'posts': posts
     }
     return render(request, 'single_hood.html', params)
+
+def createHood(request):
+    if request.method == 'POST':
+        form = CreateHoodForm(request.POST)
+        if form.is_valid():
+            hood = form.save(commit = False)
+            hood.user = request.user
+            hood.save()
+            messages.success(request, 'You Have succesfully created a hood.You may now join your neighbourhood')
+            return redirect('hoods')
+    else:
+        form = CreateHoodForm()
+        return render(request,'create.html',{"form":form})
 
 def create_post(request, hood_id):
     hood = NeighbourHood.objects.get(id=hood_id)
@@ -132,7 +197,7 @@ def leave_hood(request, id):
 def profile(request, username):
     return render(request, 'profile.html')
 
-
+@login_required
 def edit_profile(request, username):
     user = User.objects.get(username=username)
     if request.method == 'POST':
@@ -155,25 +220,15 @@ def search_business(request):
             'results': results,
             'message': message
         }
-        return render(request, 'results.html', params)
+        return render(request, 'search.html', params)
     else:
         message = "You haven't searched for any image category"
-    return render(request, "results.html")
+    return render(request, "search.html")
 
 class BusinessList(APIView):
     def get(self, request, format=None):
         all_businesses = Business.objects.all()
-        serializers = BusinessSerializer(all_businesses, many=True)
+        serializers = BusinessSerializer(all_business, many=True)
         return Response(serializers.data)
 
 
-@login_required
-def search(request):
-    current_user = request.user
-    if 'search' in request.GET and request.GET["search"]:
-        search_term = request.GET.get("search")
-        businesses = Business.objects.filter(name__icontains=search_term)
-        return render(request, 'search.html', {'businesses': businesses})
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'search.html', {"message": message})

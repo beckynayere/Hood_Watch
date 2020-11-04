@@ -1,0 +1,23 @@
+{% extends 'registration/base.html' %}
+{% load static%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{{block.super}}
+<div class="container">
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
+        <form method="post" enctype="multipart/form-data" style="margin-top: 100px">
+            {% csrf_token %} 
+           
+            {%form|crispy%}
+            <input type="submit" class="btn btn-primary btn-sm" value="Submit">
+            <input type="hidden" name="next" value="{{next}}">
+
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+
+</div>
+
+{% endblock %}

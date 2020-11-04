@@ -51,3 +51,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment',)
+
+class CreateHoodForm(forms.ModelForm):
+    class Meta:
+        model = NeighbourHood
+        fields = ['name','location','occupants']
